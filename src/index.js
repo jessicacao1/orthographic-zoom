@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import * as THREE from "three";
 import Stats from 'three/examples/jsm/libs/stats.module'
-import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls';
 class App extends Component {
   componentDidMount() {
@@ -21,9 +20,6 @@ class App extends Component {
 
 		const aspect = window.innerWidth / window.innerHeight;
 
-		//perspectiveCamera = new THREE.PerspectiveCamera( 60, aspect, 1, 1000 );
-		//perspectiveCamera.position.z = 500;
-
 		orthographicCamera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
 		orthographicCamera.position.z = 500;
 
@@ -33,21 +29,9 @@ class App extends Component {
 		scene.background = new THREE.Color( 0xcccccc );
 		scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
 
-		//const geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
 		const geometry = new THREE.BoxGeometry(100, 100, 100);
 		const material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
 
-		/*for ( let i = 0; i < 500; i ++ ) {
-
-			const mesh = new THREE.Mesh( geometry, material );
-			mesh.position.x = ( Math.random() - 0.5 ) * 1000;
-			mesh.position.y = ( Math.random() - 0.5 ) * 1000;
-			mesh.position.z = ( Math.random() - 0.5 ) * 1000;
-			mesh.updateMatrix();
-			mesh.matrixAutoUpdate = false;
-			scene.add( mesh );
-
-		} */
 		const mesh = new THREE.Mesh(geometry, material);
 		mesh.position.x = 0;
 		mesh.position.y = 0;
@@ -97,6 +81,9 @@ class App extends Component {
 		controls.panSpeed = 0.8;
 
 		controls.keys = [ 'KeyA', 'KeyS', 'KeyD' ];
+
+		controls.maxDistance = 300;
+		controls.minDistance = 200;
 
 	}
 
