@@ -12,7 +12,7 @@ class App extends Component {
 				orthographicCamera: false
 			};
 
-			const frustumSize = 400;
+			const frustumSize = 400; // size of the view
 
 			init();
 			animate();
@@ -30,23 +30,19 @@ class App extends Component {
 				// world
 
 				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xcccccc );
+				scene.background = new THREE.Color( 'white' );
 				scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
 
-				const geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
+				const geometry = new THREE.BoxGeometry(200, 200, 200);
 				const material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
 
-				for ( let i = 0; i < 500; i ++ ) {
-
-					const mesh = new THREE.Mesh( geometry, material );
-					mesh.position.x = ( Math.random() - 0.5 ) * 1000;
-					mesh.position.y = ( Math.random() - 0.5 ) * 1000;
-					mesh.position.z = ( Math.random() - 0.5 ) * 1000;
-					mesh.updateMatrix();
-					mesh.matrixAutoUpdate = false;
-					scene.add( mesh );
-
-				}
+				const mesh = new THREE.Mesh(geometry, material)
+				mesh.position.x = 0;
+				mesh.position.y = 0;
+				mesh.position.z = 0;
+				mesh.updateMatrix();
+				mesh.matrixAutoUpdate = false;
+				scene.add(mesh);
 
 				// lights
 
@@ -74,7 +70,7 @@ class App extends Component {
 				//
 
 				const gui = new GUI();
-				gui.add( params, 'orthographicCamera' ).name( 'use orthographic' ).onChange( function ( value ) {
+				gui.add( params, 'orthographicCamera' ).name( 'orthographic' ).onChange( function ( value ) {
 
 					controls.dispose();
 
@@ -100,8 +96,8 @@ class App extends Component {
 
 				controls.keys = [ 'KeyA', 'KeyS', 'KeyD' ];
 
-				controls.minDistance = 20;
-				controls.maxDistance = 30;
+				controls.minDistance = 200;
+				controls.maxDistance = 300;
 
 			}
 
